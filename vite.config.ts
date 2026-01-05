@@ -7,11 +7,6 @@ export default defineConfig({
   define: {
     'process.env.API_KEY': JSON.stringify(process.env.API_KEY || '')
   },
-  // Membatasi worker seminimal mungkin karena limit OS thread server rendah
-  worker: {
-    format: 'es',
-    plugins: () => [react()],
-  },
   server: {
     port: 3000,
     host: true,
@@ -20,17 +15,26 @@ export default defineConfig({
       overlay: false
     }
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom']
-  },
   build: {
     target: 'esnext',
     outDir: 'dist',
     minify: 'esbuild',
-    // Mengurangi beban konkurensi saat build
-    cssCodeSplit: true,
+    // Mematikan sourcemap untuk mengurangi penggunaan memori
+    sourcemap: false,
+    // Membatasi operasi file paralel ke angka paling rendah
     rollupOptions: {
-      maxParallelFileOps: 2
-    }
+      maxParallelFileOps: 1,
+      cache: false,
+      output: {
+        manualChunks: undefined
+      }
+    },
+    // Mengurangi beban memori saat kompresi
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 2000
+  },
+  // Membatasi esbuild secara internal jika memungkinkan
+  esbuild: {
+    incremental: false,
   }
 });

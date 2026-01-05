@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "GOMAXPROCS=1 vite build",
     "preview": "vite preview",
     "start": "vite"
   },
