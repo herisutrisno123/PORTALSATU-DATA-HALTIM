@@ -2,7 +2,6 @@
 import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
-import ChatBot from './components/ChatBot';
 import { Loader2 } from 'lucide-react';
 
 // Pages
@@ -83,7 +82,6 @@ const App: React.FC = () => {
           </Suspense>
         </main>
         <Footer />
-        <ChatBot />
       </div>
     </Router>
   );
