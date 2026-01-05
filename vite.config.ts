@@ -10,28 +10,21 @@ export default defineConfig({
     port: 3000,
     host: true,
     strictPort: true,
+    // Hapus proxy kosong yang tidak perlu
     hmr: {
       overlay: false
-    },
-    // Menambahkan timeout yang lebih lama untuk lingkungan cloud/proxy
-    proxy: {}
+    }
   },
   optimizeDeps: {
-    // Memaksa Vite untuk melakukan pre-bundle pada dependensi utama
-    include: [
-      'react', 
-      'react-dom', 
-      'react-router-dom', 
-      'lucide-react', 
-      'recharts', 
-      '@google/genai'
-    ]
+    // Kurangi jumlah dependensi yang di-pre-bundle secara paksa untuk mempercepat startup awal
+    include: ['react', 'react-dom']
   },
   resolve: {
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   },
   build: {
     target: 'esnext',
-    outDir: 'dist'
+    outDir: 'dist',
+    minify: 'esbuild'
   }
 });
