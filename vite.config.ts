@@ -9,10 +9,12 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    host: true
+    host: true,
+    open: false // Hindari mencoba membuka browser di server headles
   },
   build: {
     target: 'esnext',
-    outDir: 'dist'
+    outDir: 'dist',
+    emptyOutDir: true
   }
 });
