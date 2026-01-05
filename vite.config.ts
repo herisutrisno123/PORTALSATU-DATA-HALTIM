@@ -1,4 +1,3 @@
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -19,9 +18,8 @@ export default defineConfig({
     target: 'esnext',
     outDir: 'dist',
     minify: 'esbuild',
-    // Mematikan sourcemap untuk mengurangi penggunaan memori
     sourcemap: false,
-    // Membatasi operasi file paralel ke angka paling rendah
+    // Membatasi operasi paralel seminimal mungkin untuk menghindari thread limit
     rollupOptions: {
       maxParallelFileOps: 1,
       cache: false,
@@ -29,12 +27,7 @@ export default defineConfig({
         manualChunks: undefined
       }
     },
-    // Mengurangi beban memori saat kompresi
     reportCompressedSize: false,
     chunkSizeWarningLimit: 2000
-  },
-  // Membatasi esbuild secara internal jika memungkinkan
-  esbuild: {
-    incremental: false,
   }
 });
